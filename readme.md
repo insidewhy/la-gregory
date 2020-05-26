@@ -8,12 +8,12 @@ A jest date mocking library.
 
 ## Installation
 
-In `package.json` under the `jest`, create a `setupFiles` array and add `jest-date-mock` to the array.
+In `package.json` under the `jest`, create a `setupFiles` array and add `la-gregory` to the array.
 
-```js
+```json
 {
   "jest": {
-    "setupFiles": ["jest-date-mock"]
+    "setupFiles": ["la-gregory"]
   }
 }
 ```

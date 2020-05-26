@@ -24,7 +24,7 @@ In `package.json` under the `jest`, create a `setupFiles` array and add `jest-da
 
 ## Usage
 
-import { setDate, advanceDate, clearDateMock } from 'la-gregory'
+import { setDate, advanceDate, clearDateMock, setPerformanceOffset } from 'la-gregory'
 
 it('messes with date', () => {
   setDate(new Date(1988, 5, 13, 0, 0, 0))
@@ -36,6 +36,10 @@ it('messes with date', () => {
 
   advanceDate(-1000)
   expect(Date.now() - now).toEqual(2000)
+  expect(window.performance.now()).toEqual(2000)
+
+  setPerformanceOffset(-500)
+  expect(window.performance.now()).toEqual(1500)
 
   clearDateMock()
   expect(Date.now().getFullYear()).toBeGreaterThan(1988)

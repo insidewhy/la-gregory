@@ -1,5 +1,8 @@
 let nowDate: number | undefined = undefined
 
+// performance.now() = nowDate + performanceOffset
+let performanceOffset = 0
+
 const now = (): number | undefined => nowDate
 
 const mockDateClass = (OriginalDate: DateConstructor): DateConstructor => {
@@ -30,13 +33,13 @@ if (global.window) {
   // dom env
   global.window.Date = MockDate
   global.window.performance.now = function () {
-    return MockDate.now()
+    return MockDate.now() + performanceOffset
   }
 } else {
   // node / native env
   global.Date = MockDate
   require('perf_hooks').performance.now = function () {
-    return MockDate.now()
+    return MockDate.now() + performanceOffset
   }
 }
 
@@ -63,4 +66,12 @@ export const setDate = (dateOrMs: number | Date): void => {
  */
 export const clearDateMock = (): void => {
   nowDate = undefined
+  performanceOffset = 0
+}
+
+/**
+ * Set offset between performance.now() and Date.now()
+ */
+export const setPerformanceOffset = (offset: number): void => {
+  performanceOffset = offset
 }

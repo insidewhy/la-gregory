@@ -1,4 +1,4 @@
-import { advanceDate, setDate, clearDateMock } from '.'
+import { advanceDate, setDate, setPerformanceOffset, clearDateMock } from '.'
 
 describe('jest-date-mock', () => {
   afterEach(() => {
@@ -61,6 +61,9 @@ describe('jest-date-mock', () => {
 
     advanceDate(520)
     expect(performance.now()).toBe(520)
+
+    setPerformanceOffset(-100)
+    expect(performance.now()).toBe(420)
   })
 
   it('setDate can advance time to argument', () => {

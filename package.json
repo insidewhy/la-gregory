@@ -1,0 +1,52 @@
+{
+  "name": "la-gregory",
+  "version": "1.0.0",
+  "description": "jest date mocks",
+  "author": "insidewhy <github@chilon.net>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/insidewhy/la-gregory.git"
+  },
+  "keywords": [
+    "jest",
+    "date",
+    "mock"
+  ],
+  "main": "dist.es5/index.js",
+  "module": "dist.es2015/index.js",
+  "typings": "dist.es2015/index",
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "build": "yarn build-modern && yarn build-es5",
+    "build-modern": "tsc -p src",
+    "build-es5": "tsc -p src --target es5 --outDir dist.es5",
+    "build-watch": "yarn build-es5 -w",
+    "clean": "rimraf 'dist*'",
+    "lint": "eslint 'src/*.ts'",
+    "lint-fix": "yarn lint --fix",
+    "run-prettier": "prettier 'src/*.ts' '*.md'",
+    "validate-prettiness": "yarn run-prettier -c",
+    "make-prettier": "yarn run-prettier --write",
+    "test": "yarn jest && yarn jest --env node",
+    "watch": "yarn build-es5 && concurrently 'yarn build-watch' 'yarn jest-watch'",
+    "validate": "yarn test && yarn lint && yarn validate-prettiness",
+    "jest-watch": "yarn jest --watchAll"
+  },
+  "devDependencies": {
+    "@types/jest": "25.2.3",
+    "@types/node": "13.13.9",
+    "@typescript-eslint/eslint-plugin": "3.0.1",
+    "@typescript-eslint/parser": "3.0.1",
+    "concurrently": "5.2.0",
+    "eslint": "7.1.0",
+    "eslint-config-prettier": "6.11.0",
+    "husky": "4.2.5",
+    "jest": "26.0.1",
+    "prettier": "2.0.5",
+    "pretty-quick": "2.0.1",
+    "rimraf": "3.0.2",
+    "typescript": "3.9.3"
+  }
+}

@@ -6,10 +6,6 @@
 
 A jest date mocking library.
 
-```typescript
-
-```
-
 ## Installation
 
 In `package.json` under the `jest`, create a `setupFiles` array and add `jest-date-mock` to the array.
@@ -24,10 +20,11 @@ In `package.json` under the `jest`, create a `setupFiles` array and add `jest-da
 
 ## Usage
 
+```typescript
 import { setDate, advanceDate, clearDateMock, setPerformanceOffset } from 'la-gregory'
 
-it('messes with date', () => {
-  setDate(new Date(1988, 5, 13, 0, 0, 0))
+it('la-gregory can mess with the date', () => {
+  setDate(new Date(1988, 4, 13, 0, 0, 0))
 
   const now = Date.now()
 
@@ -36,11 +33,13 @@ it('messes with date', () => {
 
   advanceDate(-1000)
   expect(Date.now() - now).toEqual(2000)
-  expect(window.performance.now()).toEqual(2000)
 
   setPerformanceOffset(-500)
   expect(window.performance.now()).toEqual(1500)
+  setPerformanceOffset(-100)
+  expect(window.performance.now()).toEqual(1900)
 
   clearDateMock()
   expect(Date.now().getFullYear()).toBeGreaterThan(1988)
 })
+```
